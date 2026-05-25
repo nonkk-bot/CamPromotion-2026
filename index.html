@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Promotion Program 2026 — Cambodia</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+  /* ── Reset & base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --orange: #E8650A;
+    --orange-light: #FDF0E8;
+    --orange-dark: #C4500A;
+    --dark: #1C1C1C;
+    --gray: #6B7280;
+    --gray-light: #F9FAFB;
+    --border: #E5E7EB;
+    --white: #FFFFFF;
+    --green-bg: #ECFDF5; --green-fg: #065F46;
+    --blue-bg: #EFF6FF;  --blue-fg: #1E40AF;
+    --gray-bg: #F3F4F6;  --gray-fg: #374151;
+    --font: 'Segoe UI', Arial, sans-serif;
+    --radius: 8px;
+    --radius-lg: 12px;
+  }
+  body { font-family: var(--font); background: #F4F5F7; color: var(--dark); font-size: 14px; }
+
+  /* ── Header ── */
+  .site-header {
+    background: var(--orange);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .site-header h1 { color: #fff; font-size: 15px; font-weight: 600; letter-spacing: .01em; }
+  .site-header .sub { color: rgba(255,255,255,.75); font-size: 12px; margin-top: 1px; }
+  .last-updated { color: rgba(255,255,255,.7); font-size: 11px; }
+
+  /* ── Layout ── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1.5rem 3rem; }
+
+  /* ── KPI cards ── */
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 1.5rem; }
+  .kpi { background: var(--white); border-radius: var(--radius-lg); border: 1px solid var(--border); padding: 1rem 1.25rem; }
+  .kpi-label { font-size: 11px; color: var(--gray); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+  .kpi-value { font-size: 28px; font-weight: 700; color: var(--dark); }
+  .kpi.green { border-left: 3px solid #10B981; }
+  .kpi.blue  { border-left: 3px solid #3B82F6; }
+  .kpi.gray  { border-left: 3px solid #9CA3AF; }
+  .kpi.green .kpi-value { color: var(--green-fg); }
+  .kpi.blue  .kpi-value { color: var(--blue-fg); }
+  .kpi.gray  .kpi-value { color: var(--gray-fg); }
+
+  /* ── Toolbar ── */
+  .toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 1rem; }
+  .toolbar input, .toolbar select {
+    height: 38px; padding: 0 12px; border: 1px solid var(--border);
+    border-radius: var(--radius); font-size: 13px; font-family: var(--font);
+    background: var(--white); color: var(--dark); outline: none;
+  }
+  .toolbar input { flex: 1; min-width: 200px; }
+  .toolbar input:focus, .toolbar select:focus { border-color: var(--orange); }
+  .print-btn {
+    display: flex; align-items: center; gap: 6px;
+    height: 38px; padding: 0 16px; border: 1px solid var(--border);
+    border-radius: var(--radius); font-size: 13px; font-family: var(--font);
+    background: var(--white); color: var(--dark); cursor: pointer;
+    text-decoration: none; margin-left: auto;
+  }
+  .print-btn:hover { background: var(--gray-light); }
+
+  /* ── Table ── */
+  .tbl-card { background: var(--white); border-radius: var(--radius-lg); border: 1px solid var(--border); overflow: hidden; }
+  .tbl-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 780px; }
+  thead th {
+    background: var(--dark); color: #fff;
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .06em; padding: 10px 14px; text-align: left; white-space: nowrap;
+  }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background .12s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #FAFAFA; }
+  tbody td { padding: 11px 14px; vertical-align: middle; }
+  .no-cell { color: #9CA3AF; font-size: 12px; font-weight: 600; width: 42px; }
+  .name-cell { font-weight: 500; font-size: 13px; }
+
+  /* ── Badges / Tags ── */
+  .badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 99px; }
+  .b-open     { background: var(--green-bg); color: var(--green-fg); }
+  .b-upcoming { background: var(--blue-bg);  color: var(--blue-fg); }
+  .b-closed   { background: var(--gray-bg);  color: var(--gray-fg); }
+  .prod-tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 5px; border: 1px solid var(--border); color: var(--gray); margin: 2px 2px 2px 0; background: var(--gray-light); }
+  .sys-tag  { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 5px; background: #EFF6FF; color: #1E40AF; margin: 2px 2px 2px 0; }
+
+  /* ── Gantt ── */
+  .section-title { font-size: 13px; font-weight: 600; color: var(--dark); margin: 1.5rem 0 .75rem; display: flex; align-items: center; gap: 6px; }
+  .section-title::after { content:''; flex:1; height:1px; background: var(--border); }
+  .gantt-card { background: var(--white); border-radius: var(--radius-lg); border: 1px solid var(--border); overflow: hidden; }
+  .gantt-wrap { overflow-x: auto; }
+  .gantt-table { width: 100%; border-collapse: collapse; min-width: 700px; }
+  .gantt-table th { background: var(--dark); color: #fff; font-size: 11px; font-weight: 600; padding: 8px 6px; text-align: center; }
+  .gantt-table th.name-th { text-align: left; padding-left: 14px; width: 200px; }
+  .gantt-table td { padding: 8px 6px; border-bottom: 1px solid var(--border); text-align: center; font-size: 12px; }
+  .gantt-table td.name-td { text-align: left; padding-left: 14px; font-size: 12px; font-weight: 500; color: var(--dark); }
+  .gantt-table tr:last-child td { border-bottom: none; }
+  .gantt-table tr:hover td { background: #FAFAFA; }
+  .dot { width: 24px; height: 24px; border-radius: 50%; background: var(--orange); margin: 0 auto; }
+  .dot-cur { background: var(--orange-dark); box-shadow: 0 0 0 2px var(--orange-light); }
+  .month-cur { background: var(--orange-light) !important; }
+
+  /* ── Empty ── */
+  .empty { text-align: center; padding: 3rem; color: #9CA3AF; }
+
+  /* ── Footer ── */
+  .site-footer { text-align: center; margin-top: 2rem; font-size: 11px; color: #9CA3AF; }
+
+  /* ── Print ── */
+  @media print {
+    .site-header { position: relative; }
+    .toolbar, .print-btn { display: none; }
+    body { background: white; }
+    .tbl-card, .gantt-card { border: 1px solid #ccc; }
+  }
+
+  @media (max-width: 600px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-header h1 { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div>
+    <div class="sub">SIAM KUBOTA Corporation · Overseas Parts Sales</div>
+    <h1>Promotion Program 2026 — Cambodia</h1>
+  </div>
+  <div class="last-updated" id="lastUpdated"></div>
+</header>
+
+<main class="container">
+
+  <!-- KPI Cards -->
+  <div class="kpi-grid" id="kpiGrid"></div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <input type="text" id="search" placeholder="Search by program name or product…" oninput="render()">
+    <select id="fStatus" onchange="render()">
+      <option value="">All status</option>
+      <option value="Opening">Opening</option>
+      <option value="Upcoming">Upcoming</option>
+      <option value="Closed">Closed</option>
+    </select>
+    <select id="fProd" onchange="render()">
+      <option value="">All products</option>
+    </select>
+    <button class="print-btn" onclick="window.print()">
+      <i class="ti ti-printer"></i> Print / Save PDF
+    </button>
+  </div>
+
+  <!-- Table -->
+  <div class="tbl-card">
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Program Name</th>
+            <th>Product</th>
+            <th>Date Open</th>
+            <th>Date Close</th>
+            <th>System</th>
+            <th>Status</th>
+            <th>Remarks</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Gantt -->
+  <div class="section-title"><i class="ti ti-calendar-stats"></i> Timeline overview</div>
+  <div class="gantt-card">
+    <div class="gantt-wrap">
+      <table class="gantt-table" id="ganttTable"></table>
+    </div>
+  </div>
+
+  <div class="site-footer">
+    Status updates automatically based on today's date &nbsp;·&nbsp; SIAM KUBOTA Corporation &nbsp;·&nbsp; Overseas Parts Sales – Cambodia
+  </div>
+
+</main>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+//  EDIT YOUR PROMOTION DATA HERE
+//  To add a new program: copy one row block, paste below, fill in.
+//  Date format: "YYYY-MM-DD"
+//  Products: use TT, CH, TP, DR, ME, DE, OIL-TT, OIL-DE
+//  Systems: "KADS", "Websales", or both ["KADS","Websales"]
+// ═══════════════════════════════════════════════════════════════
+const PROGRAMS = [
+  {
+    name:     "Tractor Parts Q1 Campaign",
+    products: ["TT"],
+    open:     "2026-01-05",
+    close:    "2026-01-31",
+    systems:  ["KADS"],
+    remarks:  "Focus AD upcountry provinces"
+  },
+  {
+    name:     "Combine Harvester Harvest Push",
+    products: ["CH"],
+    open:     "2026-02-01",
+    close:    "2026-02-28",
+    systems:  ["KADS", "Websales"],
+    remarks:  "Tied to peak harvest window"
+  },
+  {
+    name:     "Mini Excavator Parts Promo",
+    products: ["ME"],
+    open:     "2026-03-15",
+    close:    "2026-04-15",
+    systems:  ["KADS"],
+    remarks:  ""
+  },
+  {
+    name:     "Lube Oil TAX Exemption Launch",
+    products: ["OIL-TT", "OIL-DE"],
+    open:     "2026-04-01",
+    close:    "2026-06-30",
+    systems:  ["Websales"],
+    remarks:  "H2 lubricant target support – 200MB"
+  },
+  {
+    name:     "Rice Transplanter Season Deal",
+    products: ["TP"],
+    open:     "2026-05-01",
+    close:    "2026-07-31",
+    systems:  ["KADS", "Websales"],
+    remarks:  "AD booking deadline: 25th each month"
+  },
+  {
+    name:     "Mid-Year Parts Clearance",
+    products: ["TT", "DE", "CH"],
+    open:     "2026-06-01",
+    close:    "2026-06-30",
+    systems:  ["Websales"],
+    remarks:  ""
+  },
+  {
+    name:     "Drone Parts Innovation Drive",
+    products: ["DR"],
+    open:     "2026-08-01",
+    close:    "2026-09-30",
+    systems:  ["Websales"],
+    remarks:  "New product line push"
+  },
+  {
+    name:     "H2 Lubricant Volume Push",
+    products: ["OIL-TT"],
+    open:     "2026-07-01",
+    close:    "2026-12-31",
+    systems:  ["KADS", "Websales"],
+    remarks:  "Target 200MB H2 2026"
+  },
+  {
+    name:     "Diesel Engine Year-End Promo",
+    products: ["DE"],
+    open:     "2026-11-01",
+    close:    "2026-11-30",
+    systems:  ["KADS"],
+    remarks:  ""
+  },
+  {
+    name:     "Year-End Full Range Campaign",
+    products: ["TT", "CH", "TP", "ME"],
+    open:     "2026-12-01",
+    close:    "2026-12-31",
+    systems:  ["KADS", "Websales"],
+    remarks:  "Annual closing push"
+  }
+];
+
+// Last updated — edit this whenever you upload a new version
+const LAST_UPDATED = "25 May 2026";
+
+// ═══════════════════════════════════════════════════════════════
+//  DO NOT EDIT BELOW THIS LINE
+// ═══════════════════════════════════════════════════════════════
+const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const ALL_PRODS = [...new Set(PROGRAMS.flatMap(p => p.products))].sort();
+
+function today() { return new Date().toISOString().slice(0, 10); }
+function curMonth() { return new Date().getMonth() + 1; }
+
+function getStatus(o, c) {
+  const t = today();
+  return t < o ? "Upcoming" : t > c ? "Closed" : "Opening";
+}
+
+function fmt(d) {
+  if (!d) return "—";
+  const [y, m, day] = d.split("-");
+  return `${day}/${m}/${String(y).slice(2)}`;
+}
+
+function badgeCls(st) {
+  return st === "Opening" ? "b-open" : st === "Upcoming" ? "b-upcoming" : "b-closed";
+}
+
+function init() {
+  document.getElementById("lastUpdated").textContent = "Updated: " + LAST_UPDATED;
+  populateProdFilter();
+  render();
+  renderGantt();
+}
+
+function populateProdFilter() {
+  const sel = document.getElementById("fProd");
+  sel.innerHTML = '<option value="">All products</option>' +
+    ALL_PRODS.map(p => `<option value="${p}">${p}</option>`).join("");
+}
+
+function render() {
+  const q  = document.getElementById("search").value.toLowerCase();
+  const fs = document.getElementById("fStatus").value;
+  const fp = document.getElementById("fProd").value;
+
+  const filtered = PROGRAMS.filter(r => {
+    const st = getStatus(r.open, r.close);
+    return (!q  || r.name.toLowerCase().includes(q) || r.products.some(p => p.toLowerCase().includes(q)))
+        && (!fs || st === fs)
+        && (!fp || r.products.includes(fp));
+  });
+
+  // KPI
+  const op = PROGRAMS.filter(r => getStatus(r.open, r.close) === "Opening").length;
+  const up = PROGRAMS.filter(r => getStatus(r.open, r.close) === "Upcoming").length;
+  const cl = PROGRAMS.filter(r => getStatus(r.open, r.close) === "Closed").length;
+  document.getElementById("kpiGrid").innerHTML = `
+    <div class="kpi"><div class="kpi-label">Total programs</div><div class="kpi-value">${PROGRAMS.length}</div></div>
+    <div class="kpi green"><div class="kpi-label">Opening now</div><div class="kpi-value">${op}</div></div>
+    <div class="kpi blue"><div class="kpi-label">Upcoming</div><div class="kpi-value">${up}</div></div>
+    <div class="kpi gray"><div class="kpi-label">Closed</div><div class="kpi-value">${cl}</div></div>
+  `;
+
+  // Table
+  const tbody = document.getElementById("tbody");
+  if (!filtered.length) {
+    tbody.innerHTML = `<tr><td colspan="8" class="empty"><i class="ti ti-mood-empty" style="font-size:28px;display:block;margin:0 auto 8px"></i>No programs match your filter</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = filtered.map((r, i) => {
+    const st = getStatus(r.open, r.close);
+    return `<tr>
+      <td class="no-cell">${i + 1}</td>
+      <td class="name-cell">${r.name}</td>
+      <td>${r.products.map(p => `<span class="prod-tag">${p}</span>`).join("")}</td>
+      <td>${fmt(r.open)}</td>
+      <td>${fmt(r.close)}</td>
+      <td>${r.systems.map(s => `<span class="sys-tag">${s}</span>`).join("")}</td>
+      <td><span class="badge ${badgeCls(st)}">${st}</span></td>
+      <td style="color:#6B7280;font-size:12px">${r.remarks || "—"}</td>
+    </tr>`;
+  }).join("");
+}
+
+function renderGantt() {
+  const cm = curMonth();
+  let html = `<thead><tr><th class="name-th">Program</th>${MONTHS.map((m, i) =>
+    `<th class="${i + 1 === cm ? "month-cur" : ""}">${m}</th>`
+  ).join("")}</tr></thead><tbody>`;
+
+  html += PROGRAMS.map(r => {
+    const oM = parseInt(r.open.slice(5, 7));
+    const cM = parseInt(r.close.slice(5, 7));
+    const oY = parseInt(r.open.slice(0, 4));
+    const cY = parseInt(r.close.slice(0, 4));
+    const cells = MONTHS.map((_, i) => {
+      const m = i + 1;
+      const active = (oY === 2026 && cY === 2026 && m >= oM && m <= cM)
+                  || (oY < 2026 && cY === 2026 && m <= cM)
+                  || (oY === 2026 && cY > 2026 && m >= oM);
+      const cur = active && m === cm;
+      return `<td class="${m === cm ? "month-cur" : ""}">${active ? `<div class="dot${cur ? " dot-cur" : ""}"></div>` : ""}</td>`;
+    }).join("");
+    return `<tr><td class="name-td">${r.name}</td>${cells}</tr>`;
+  }).join("");
+
+  html += "</tbody>";
+  document.getElementById("ganttTable").innerHTML = html;
+}
+
+init();
+</script>
+</body>
+</html>
