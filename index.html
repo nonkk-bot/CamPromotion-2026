@@ -210,88 +210,12 @@
 //  Products: use TT, CH, TP, DR, ME, DE, OIL-TT, OIL-DE
 //  Systems: "KADS", "Websales", or both ["KADS","Websales"]
 // ═══════════════════════════════════════════════════════════════
-const PROGRAMS = [
-  {
-    name:     "Tractor Parts Q1 Campaign",
-    products: ["TT"],
-    open:     "2026-01-05",
-    close:    "2026-01-31",
-    systems:  ["KADS"],
-    remarks:  "Focus AD upcountry provinces"
-  },
-  {
-    name:     "Combine Harvester Harvest Push",
-    products: ["CH"],
-    open:     "2026-02-01",
-    close:    "2026-02-28",
-    systems:  ["KADS", "Websales"],
-    remarks:  "Tied to peak harvest window"
-  },
-  {
-    name:     "Mini Excavator Parts Promo",
-    products: ["ME"],
-    open:     "2026-03-15",
-    close:    "2026-04-15",
-    systems:  ["KADS"],
-    remarks:  ""
-  },
-  {
-    name:     "Lube Oil TAX Exemption Launch",
-    products: ["OIL-TT", "OIL-DE"],
-    open:     "2026-04-01",
-    close:    "2026-06-30",
-    systems:  ["Websales"],
-    remarks:  "H2 lubricant target support – 200MB"
-  },
-  {
-    name:     "Rice Transplanter Season Deal",
-    products: ["TP"],
-    open:     "2026-05-01",
-    close:    "2026-07-31",
-    systems:  ["KADS", "Websales"],
-    remarks:  "AD booking deadline: 25th each month"
-  },
-  {
-    name:     "Mid-Year Parts Clearance",
-    products: ["TT", "DE", "CH"],
-    open:     "2026-06-01",
-    close:    "2026-06-30",
-    systems:  ["Websales"],
-    remarks:  ""
-  },
-  {
-    name:     "Drone Parts Innovation Drive",
-    products: ["DR"],
-    open:     "2026-08-01",
-    close:    "2026-09-30",
-    systems:  ["Websales"],
-    remarks:  "New product line push"
-  },
-  {
-    name:     "H2 Lubricant Volume Push",
-    products: ["OIL-TT"],
-    open:     "2026-07-01",
-    close:    "2026-12-31",
-    systems:  ["KADS", "Websales"],
-    remarks:  "Target 200MB H2 2026"
-  },
-  {
-    name:     "Diesel Engine Year-End Promo",
-    products: ["DE"],
-    open:     "2026-11-01",
-    close:    "2026-11-30",
-    systems:  ["KADS"],
-    remarks:  ""
-  },
-  {
-    name:     "Year-End Full Range Campaign",
-    products: ["TT", "CH", "TP", "ME"],
-    open:     "2026-12-01",
-    close:    "2026-12-31",
-    systems:  ["KADS", "Websales"],
-    remarks:  "Annual closing push"
-  }
+
+  const PROGRAMS = [
+
 ];
+
+  const LAST_UPDATED = "25 May 2026";  // ← change to today's date
 
 // Last updated — edit this whenever you upload a new version
 const LAST_UPDATED = "25 May 2026";
@@ -402,21 +326,6 @@ function renderGantt() {
   html += "</tbody>";
   document.getElementById("ganttTable").innerHTML = html;
 }
-  const PROGRAMS = [
-  {
-    name:     "Tractor Parts Q1 Campaign",
-    ...
-  },
-  {
-    name:     "Combine Harvester Harvest Push",
-    ...
-  },
-  // ... all the way to the last one ...
-  {
-    name:     "Year-End Full Range Campaign",
-    ...
-  }
-];
 
 init();
 </script>
